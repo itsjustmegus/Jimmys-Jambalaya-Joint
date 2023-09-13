@@ -14,12 +14,16 @@ def get_input():
 
 def display():
     # TODO: Display transaction for customer
-    num_of_bowls = jimmys_jambalaya.num_of_bowls
-    total_sale = jimmys_jambalaya.total_sale
+    num_of_bowls = jimmys_jambalaya.get_number_of_bowls()
+    total_sale = jimmys_jambalaya.get_total_sale()
     print(f"Number of bowls ordered: {num_of_bowls}")
     print(f"Your order total is: ${total_sale:,.2f}")
 
+
+num_of_bowls = get_input()
+
 jimmys_jambalaya = jambalaya.JimmysJambalaya()
-jimmys_jambalaya.get_input()
+
 jimmys_jambalaya.calculate(num_of_bowls)
-jimmys_jambalaya.display()
+
+display()
