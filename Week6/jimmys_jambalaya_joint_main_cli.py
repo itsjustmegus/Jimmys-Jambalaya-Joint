@@ -1,29 +1,49 @@
 # Jimmy's Jambalaya Joint
 # File:        jimmys_jambalaya_joint_main_cli.py
 # Author:      Gus Allred
-# Created:     09/13/23
+# Created:     09/27/23
 # Version:     2
 # Description: POS program
 
-import jimmys_jambalaya_joint_class as jambalaya
+import jimmys_jambalaya_joint_class as jimmys_jambalaya
 
-def get_input():
-    # TODO: Get int input from user how many bowls sold
-    num_of_bowls = int(input("Enter number of bowls of Jambalaya: "))
-    return num_of_bowls
+def display_menu():
+    print("Menu:")
+    menu_items = jambalaya.get_menu_items()
+    menu_prices = jambalaya.get_menu_prices()
+    for item, price in zip(menu_items, menu_prices):
+        print(f"{item}: ${price:.2f}")
 
-def display():
+def display(bowls, rice, drinks):
     # TODO: Display transaction for customer
-    num_of_bowls = jimmys_jambalaya.get_number_of_bowls()
-    total_sale = jimmys_jambalaya.get_total_sale()
-    print(f"Number of bowls ordered: {num_of_bowls}")
+    total_sale = jambalaya.get_total_sale()
+    print(f" bowls of jambalaya ordered: {bowls}")
+    print(f"bowls of cajun rice ordered: {rice}")
+    print(f"             drinks ordered: {drinks}")
     print(f"Your order total is: ${total_sale:,.2f}")
 
 
-num_of_bowls = get_input()
+# Create JimmysJambalaya object
+jambalaya = jimmys_jambalaya.JimmysJambalaya()
+display_menu()
 
-jimmys_jambalaya = jambalaya.JimmysJambalaya()
+# Get number of bowls from user
+jambalaya.get_qty_bowls()
+bowls = jambalaya._num_of_bowls
 
-jimmys_jambalaya.calculate(num_of_bowls)
+# Get number of rice from user
+jambalaya.get_qty_rice()
+rice = jambalaya._num_of_rice
 
-display()
+# Get number of drinks from user
+jambalaya.get_qty_drinks()
+drinks = jambalaya._num_of_drinks
+
+# Calculate cost of bowls
+jambalaya.calculate_bowls(bowls)
+jambalaya.calculate_rice(rice)
+jambalaya.calculate_drinks(drinks)
+jambalaya.calculate_total()
+
+# Display results of transaction
+display(bowls, rice, drinks)
